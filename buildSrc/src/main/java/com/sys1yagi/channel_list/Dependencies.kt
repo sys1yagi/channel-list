@@ -10,6 +10,15 @@ object Libs {
     const val junit5 = "org.junit.jupiter:junit-jupiter:5.5.2"
     const val material = "com.google.android.material:material:1.2.1"
 
+    object Google {
+        const val googleService = "com.google.gms:google-services:4.3.4"
+    }
+    object Firebase {
+        const val bom = "com.google.firebase:firebase-bom:26.0.0"
+        const val analytics = "com.google.firebase:firebase-analytics-ktx"
+        const val auth = "com.google.firebase:firebase-auth-ktx"
+    }
+
     object Accompanist {
         private const val version = "0.3.1"
         const val coil = "dev.chrisbanes.accompanist:accompanist-coil:$version"

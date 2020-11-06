@@ -3,6 +3,7 @@ import com.sys1yagi.channel_list.Libs
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -45,6 +46,8 @@ android {
 }
 
 dependencies {
+    implementation project(":domain")
+
     implementation Libs.Kotlin.stdlib
     implementation Libs.Coroutines.android
     implementation Libs.material
@@ -71,6 +74,10 @@ dependencies {
     implementation Libs.DI.androidxScope
     implementation Libs.DI.androidxViewModel
     implementation Libs.DI.androidExt
+
+    implementation platform(Libs.Firebase.bom)
+    implementation Libs.Firebase.analytics
+    implementation Libs.Firebase.auth
 
     testImplementation Libs.junit
 
