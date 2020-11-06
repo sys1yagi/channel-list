@@ -1,2 +1,3 @@
 rootProject.name = "channel-list"
 include ':app'
+include ':domain'
