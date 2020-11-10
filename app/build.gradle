@@ -43,6 +43,9 @@ android {
         kotlinCompilerVersion Libs.Kotlin.version
         kotlinCompilerExtensionVersion Libs.AndroidX.Compose.version
     }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
 }
 
 dependencies {
@@ -75,9 +78,11 @@ dependencies {
     implementation Libs.DI.androidxViewModel
     implementation Libs.DI.androidExt
 
-    implementation platform(Libs.Firebase.bom)
-    implementation Libs.Firebase.analytics
-    implementation Libs.Firebase.auth
+
+    implementation Libs.Google.apiClient
+    implementation Libs.Google.youtube
+    implementation Libs.Google.oauth2
+    implementation Libs.GooglePlay.auth
 
     testImplementation Libs.junit
 

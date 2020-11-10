@@ -1,4 +1,4 @@
-package com.sys1yagi.channel_list.ui
+package com.sys1yagi.channel_list.presentation
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

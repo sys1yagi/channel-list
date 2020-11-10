@@ -12,11 +12,13 @@ object Libs {
 
     object Google {
         const val googleService = "com.google.gms:google-services:4.3.4"
+        const val apiClient = "com.google.api-client:google-api-client-android:1.30.11"
+        const val youtube = "com.google.apis:google-api-services-youtube:v3-rev20200618-1.30.9"
+        const val oauth2 ="com.google.auth:google-auth-library-oauth2-http:0.22.0"
     }
-    object Firebase {
-        const val bom = "com.google.firebase:firebase-bom:26.0.0"
-        const val analytics = "com.google.firebase:firebase-analytics-ktx"
-        const val auth = "com.google.firebase:firebase-auth-ktx"
+
+    object GooglePlay {
+        const val auth = "com.google.android.gms:play-services-auth:18.1.0"
     }
 
     object Accompanist {
