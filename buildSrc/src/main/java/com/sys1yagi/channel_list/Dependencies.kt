@@ -41,19 +41,21 @@ object Libs {
     }
 
     object DI {
-        private const val version = "2.1.3"
+        private const val version = "2.1.6"
         val core = "org.koin:koin-core:$version"
         val coreExt = "org.koin:koin-core-ext:$version"
         val android = "org.koin:koin-android:$version"
         val androidxScope = "org.koin:koin-androidx-scope:$version"
         val androidxViewModel = "org.koin:koin-androidx-viewmodel:$version"
-        val androidExt = "org.koin:koin-android-ext:2.0.1"
+        val androidxCompose = "org.koin:koin-androidx-compose:2.2.0-beta-2"
+        val androidxExt = "org.koin:koin-androidx-ext:$version"
     }
 
     object AndroidX {
         const val coreKtx = "androidx.core:core-ktx:1.5.0-alpha02"
         const val multiDex = "androidx.multidex:multidex:2.0.1"
         const val appCompat = "androidx.appcompat:appcompat:1.2.0"
+        const val activity = "androidx.activity:activity-ktx:1.2.0-beta01"
 
         object Compose {
             const val snapshot = ""
@@ -82,5 +84,10 @@ object Libs {
 
             const val espressoCore = "androidx.test.espresso:espresso-core:3.2.0"
         }
+    }
+
+    object Preference {
+        const val kotPref = "com.chibatching.kotpref:kotpref:2.12.0"
+
     }
 }

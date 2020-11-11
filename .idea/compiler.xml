@@ -4,7 +4,7 @@
     <bytecodeTargetLevel target="1.8">
       <module name="channel-list.app" target="11" />
       <module name="channel-list.buildSrc" target="11" />
-      <module name="channel-list.infrastracture" target="11" />
+      <module name="channel-list.infrastructure" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

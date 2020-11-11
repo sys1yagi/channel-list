@@ -50,6 +50,7 @@ android {
 
 dependencies {
     implementation project(":domain")
+    implementation project(":infrastructure")
 
     implementation Libs.Kotlin.stdlib
     implementation Libs.Coroutines.android
@@ -57,6 +58,7 @@ dependencies {
     implementation Libs.AndroidX.coreKtx
     implementation Libs.AndroidX.multiDex
     implementation Libs.AndroidX.appCompat
+    implementation Libs.AndroidX.activity
 
     implementation Libs.AndroidX.Compose.runtime
     implementation Libs.AndroidX.Compose.foundation
@@ -76,13 +78,8 @@ dependencies {
     implementation Libs.DI.android
     implementation Libs.DI.androidxScope
     implementation Libs.DI.androidxViewModel
-    implementation Libs.DI.androidExt
-
-
-    implementation Libs.Google.apiClient
-    implementation Libs.Google.youtube
-    implementation Libs.Google.oauth2
-    implementation Libs.GooglePlay.auth
+    implementation Libs.DI.androidxCompose
+    implementation Libs.DI.androidxExt
 
     testImplementation Libs.junit
 
