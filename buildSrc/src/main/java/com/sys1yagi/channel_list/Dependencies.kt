@@ -59,7 +59,7 @@ object Libs {
 
         object Compose {
             const val snapshot = ""
-            const val version = "1.0.0-alpha06"
+            const val version = "1.0.0-alpha07"
 
             const val runtime = "androidx.compose.runtime:runtime:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"
@@ -69,7 +69,7 @@ object Libs {
             const val animation = "androidx.compose.animation:animation:$version"
             const val tooling = "androidx.ui:ui-tooling:$version"
             const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
-            const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha01"
+            const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha02"
         }
 
         object Test {

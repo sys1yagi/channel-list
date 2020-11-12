@@ -1,10 +1,10 @@
 package com.sys1yagi.channel_list
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.onCommit
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.*
 import com.sys1yagi.channel_list.presentation.page.home.HomePage
 import com.sys1yagi.channel_list.presentation.page.login.LoginPage
 
@@ -14,14 +14,30 @@ sealed class Screen(val route: String) {
 }
 
 @Composable
-fun App(startDestination: Screen, globalViewModel: GlobalViewModel) {
+fun App() {
+    val viewModel = GlobalViewModelAmbient.current
+    val loginState = viewModel.loginState.collectAsState(null)
     val navController: NavHostController = rememberNavController()
-    NavHost(navController, startDestination = startDestination.route) {
+
+    onCommit(loginState.value) {
+        val navBackStackEntry = navController.currentBackStackEntry
+        val currentRoute = navBackStackEntry?.arguments?.getString(KEY_ROUTE)
+        if(loginState.value != null && currentRoute == Screen.Login.route) {
+            navController.navigate(Screen.Home.route)
+        }
+        if(loginState.value == null && currentRoute != null && currentRoute != Screen.Login.route) {
+            navController.navigate(Screen.Login.route)
+        }
+    }
+
+    NavHost(navController,
+        startDestination = Screen.Login.route,
+    ) {
         composable(Screen.Home.route) {
-            HomePage(globalViewModel)
+            HomePage()
         }
         composable(Screen.Login.route) {
-            LoginPage(globalViewModel)
+            LoginPage(viewModel)
         }
     }
 }
