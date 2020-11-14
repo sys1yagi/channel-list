@@ -22,9 +22,21 @@ class ChannelListPageViewModel(
             subscriptionChannelService.subscriptionChannels().collect {
                 _state.value = ChannelListPageViewState(
                     false,
+                    false,
                     it
                 )
             }
+        }
+    }
+
+    fun refresh() {
+        viewModelScope.launch {
+            _state.value = ChannelListPageViewState(
+                false,
+                true,
+                _state.value.subscriptionChannels
+            )
+            subscriptionChannelService.refresh()
         }
     }
 
@@ -35,6 +47,7 @@ class ChannelListPageViewModel(
 }
 
 data class ChannelListPageViewState(
-    val refreshing: Boolean = true,
+    val initializing: Boolean = true,
+    val swipeRefreshing: Boolean = false,
     val subscriptionChannels: List<SubscriptionChannel> = emptyList()
 )

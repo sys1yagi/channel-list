@@ -53,7 +53,6 @@ class YoutubeSubscriptionChannelRepository(
                 )
             }.toTypedArray()
         )
-        Log.d("moge", subscriptionChannelDao.count().toString())
     }
 
     override fun subscriptionChannels(): Flow<List<SubscriptionChannel>> {
