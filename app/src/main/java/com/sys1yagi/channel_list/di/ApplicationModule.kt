@@ -10,7 +10,11 @@ import com.google.api.services.youtube.YouTubeScopes
 import com.sys1yagi.channel_list.GlobalViewModel
 import com.sys1yagi.channel_list.MainActivity
 import com.sys1yagi.channel_list.domain.auth.AuthenticationRepository
-import com.sys1yagi.channel_list.infrastracture.googleapi.GoogleAuthenticationRepository
+import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannelRepository
+import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannelService
+import com.sys1yagi.channel_list.infrastracture.repository.GoogleAuthenticationRepository
+import com.sys1yagi.channel_list.infrastracture.repository.YoutubeSubscriptionChannelRepository
+import com.sys1yagi.channel_list.presentation.page.channelist.ChannelListPageViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.parameter.parametersOf
@@ -33,16 +37,23 @@ val singleton by lazy {
             YouTube.Builder(
                 NetHttpTransport(),
                 JacksonFactory(),
-                get(),
+                get<GoogleAccountCredential>(),
             ).setApplicationName("com.sys1yagi.channel_list")
                 .build()
+        }
+        single<SubscriptionChannelRepository> {
+            YoutubeSubscriptionChannelRepository(
+                get()
+            )
+        }
+        single<SubscriptionChannelService> {
+            SubscriptionChannelService(get())
         }
     }
 }
 
 val mainActivity by lazy {
     module {
-
         scope(named<MainActivity>()) {
             scoped<AuthenticationRepository> { (activity: ComponentActivity) ->
                 GoogleAuthenticationRepository(
@@ -56,24 +67,32 @@ val mainActivity by lazy {
                     get { parametersOf(activity) }
                 )
             }
-            scoped {
-                GoogleAccountCredential.usingOAuth2(
-                    androidContext(),
-                    listOf(
-                        YouTubeScopes.YOUTUBE_READONLY
-                    )
-                ).apply {
-                    backOff = ExponentialBackOff()
-                }
-            }
-            scoped<YouTube> {
-                YouTube.Builder(
-                    NetHttpTransport(),
-                    JacksonFactory(),
-                    get<GoogleAccountCredential>(),
-                ).setApplicationName("com.sys1yagi.channel_list")
-                    .build()
-            }
+//            scoped {
+//                GoogleAccountCredential.usingOAuth2(
+//                    androidContext(),
+//                    listOf(
+//                        YouTubeScopes.YOUTUBE_READONLY
+//                    )
+//                ).apply {
+//                    backOff = ExponentialBackOff()
+//                }
+//            }
+//            scoped<YouTube> {
+//                YouTube.Builder(
+//                    NetHttpTransport(),
+//                    JacksonFactory(),
+//                    get<GoogleAccountCredential>(),
+//                ).setApplicationName("com.sys1yagi.channel_list")
+//                    .build()
+//            }
+        }
+    }
+}
+
+val viewModels by lazy {
+    module {
+        viewModel {
+            ChannelListPageViewModel(get())
         }
     }
 }

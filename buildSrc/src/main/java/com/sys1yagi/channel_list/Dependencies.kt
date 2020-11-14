@@ -22,7 +22,7 @@ object Libs {
     }
 
     object Accompanist {
-        private const val version = "0.3.1"
+        private const val version = "0.3.3.1"
         const val coil = "dev.chrisbanes.accompanist:accompanist-coil:$version"
     }
 
@@ -41,13 +41,13 @@ object Libs {
     }
 
     object DI {
-        private const val version = "2.1.6"
+        private const val version = "2.2.0"
         val core = "org.koin:koin-core:$version"
         val coreExt = "org.koin:koin-core-ext:$version"
         val android = "org.koin:koin-android:$version"
         val androidxScope = "org.koin:koin-androidx-scope:$version"
         val androidxViewModel = "org.koin:koin-androidx-viewmodel:$version"
-        val androidxCompose = "org.koin:koin-androidx-compose:2.2.0-beta-2"
+//        val androidxCompose = "org.koin:koin-androidx-compose:2.2.0-beta-2"
         val androidxExt = "org.koin:koin-androidx-ext:$version"
     }
 

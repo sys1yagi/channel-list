@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.sys1yagi.channel_list"
-        minSdkVersion 23
+        minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -78,7 +78,7 @@ dependencies {
     implementation Libs.DI.android
     implementation Libs.DI.androidxScope
     implementation Libs.DI.androidxViewModel
-    implementation Libs.DI.androidxCompose
+//    implementation Libs.DI.androidxCompose
     implementation Libs.DI.androidxExt
 
     testImplementation Libs.junit

@@ -1,4 +1,4 @@
-package com.sys1yagi.channel_list.infrastracture.googleapi
+package com.sys1yagi.channel_list.infrastracture.repository
 
 import android.accounts.AccountManager
 import android.app.Activity
@@ -20,11 +20,12 @@ import kotlinx.coroutines.withContext
 
 class GoogleAuthenticationRepository(
     activity: ComponentActivity,
-    val credential: GoogleAccountCredential,
-    val service: YouTube
+    private val credential: GoogleAccountCredential,
+    private val service: YouTube
 ) : AuthenticationRepository {
     private var user = MutableStateFlow(
         AuthenticationSetting.accountName?.let { accountName ->
+            credential.selectedAccountName = accountName
             if (AuthenticationSetting.permitted) {
                 User(accountName)
             } else {

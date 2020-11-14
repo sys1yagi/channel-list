@@ -1,5 +1,6 @@
 package com.sys1yagi.channel_list
 
+import androidx.compose.animation.Crossfade
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.onCommit
@@ -17,27 +18,12 @@ sealed class Screen(val route: String) {
 fun App() {
     val viewModel = GlobalViewModelAmbient.current
     val loginState = viewModel.loginState.collectAsState(null)
-    val navController: NavHostController = rememberNavController()
-
-    onCommit(loginState.value) {
-        val navBackStackEntry = navController.currentBackStackEntry
-        val currentRoute = navBackStackEntry?.arguments?.getString(KEY_ROUTE)
-        if(loginState.value != null && currentRoute == Screen.Login.route) {
-            navController.navigate(Screen.Home.route)
+    Crossfade(current = loginState.value) {
+        if(it == null) {
+            LoginPage()
         }
-        if(loginState.value == null && currentRoute != null && currentRoute != Screen.Login.route) {
-            navController.navigate(Screen.Login.route)
-        }
-    }
-
-    NavHost(navController,
-        startDestination = Screen.Login.route,
-    ) {
-        composable(Screen.Home.route) {
+        else{
             HomePage()
-        }
-        composable(Screen.Login.route) {
-            LoginPage(viewModel)
         }
     }
 }

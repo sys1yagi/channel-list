@@ -10,12 +10,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.ui.tooling.preview.Preview
 import com.sys1yagi.channel_list.GlobalViewModel
+import com.sys1yagi.channel_list.GlobalViewModelAmbient
 import com.sys1yagi.channel_list.R
 
 @Composable
-fun LoginPage(globalViewModel: GlobalViewModel) {
+fun LoginPage() {
+    val viewModel = GlobalViewModelAmbient.current
     LoginDisplay {
-        globalViewModel.signIn()
+        viewModel.signIn()
     }
 }
 
