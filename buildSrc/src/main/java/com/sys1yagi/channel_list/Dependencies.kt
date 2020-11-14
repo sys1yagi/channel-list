@@ -14,7 +14,7 @@ object Libs {
         const val googleService = "com.google.gms:google-services:4.3.4"
         const val apiClient = "com.google.api-client:google-api-client-android:1.30.11"
         const val youtube = "com.google.apis:google-api-services-youtube:v3-rev20200618-1.30.9"
-        const val oauth2 ="com.google.auth:google-auth-library-oauth2-http:0.22.0"
+        const val oauth2 = "com.google.auth:google-auth-library-oauth2-http:0.22.0"
     }
 
     object GooglePlay {
@@ -47,8 +47,17 @@ object Libs {
         val android = "org.koin:koin-android:$version"
         val androidxScope = "org.koin:koin-androidx-scope:$version"
         val androidxViewModel = "org.koin:koin-androidx-viewmodel:$version"
-//        val androidxCompose = "org.koin:koin-androidx-compose:2.2.0-beta-2"
+
+        //        val androidxCompose = "org.koin:koin-androidx-compose:2.2.0-beta-2"
         val androidxExt = "org.koin:koin-androidx-ext:$version"
+    }
+
+    object Database {
+        const val version = "2.2.5"
+
+        const val runtime = "androidx.room:room-runtime:$version"
+        const val compiler = "androidx.room:room-compiler:$version"
+        const val ktx = "androidx.room:room-ktx:$version"
     }
 
     object AndroidX {

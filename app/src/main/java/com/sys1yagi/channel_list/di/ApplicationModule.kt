@@ -1,6 +1,7 @@
 package com.sys1yagi.channel_list.di
 
 import androidx.activity.ComponentActivity
+import androidx.room.Room
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential
 import com.google.api.client.http.javanet.NetHttpTransport
 import com.google.api.client.json.jackson2.JacksonFactory
@@ -12,9 +13,12 @@ import com.sys1yagi.channel_list.MainActivity
 import com.sys1yagi.channel_list.domain.auth.AuthenticationRepository
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannelRepository
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannelService
+import com.sys1yagi.channel_list.infrastracture.database.Database
+import com.sys1yagi.channel_list.infrastracture.database.SubscriptionChannelDao
 import com.sys1yagi.channel_list.infrastracture.repository.GoogleAuthenticationRepository
 import com.sys1yagi.channel_list.infrastracture.repository.YoutubeSubscriptionChannelRepository
 import com.sys1yagi.channel_list.presentation.page.channelist.ChannelListPageViewModel
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.parameter.parametersOf
@@ -43,11 +47,21 @@ val singleton by lazy {
         }
         single<SubscriptionChannelRepository> {
             YoutubeSubscriptionChannelRepository(
+                get(),
                 get()
             )
         }
         single<SubscriptionChannelService> {
             SubscriptionChannelService(get())
+        }
+        single<Database> {
+            Room.databaseBuilder(
+                androidApplication(),
+                Database::class.java, "database-name"
+            ).build()
+        }
+        single<SubscriptionChannelDao> {
+            get<Database>().subscriptionChannelDao()
         }
     }
 }
@@ -67,24 +81,6 @@ val mainActivity by lazy {
                     get { parametersOf(activity) }
                 )
             }
-//            scoped {
-//                GoogleAccountCredential.usingOAuth2(
-//                    androidContext(),
-//                    listOf(
-//                        YouTubeScopes.YOUTUBE_READONLY
-//                    )
-//                ).apply {
-//                    backOff = ExponentialBackOff()
-//                }
-//            }
-//            scoped<YouTube> {
-//                YouTube.Builder(
-//                    NetHttpTransport(),
-//                    JacksonFactory(),
-//                    get<GoogleAccountCredential>(),
-//                ).setApplicationName("com.sys1yagi.channel_list")
-//                    .build()
-//            }
         }
     }
 }

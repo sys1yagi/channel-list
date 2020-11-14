@@ -1,6 +1,5 @@
 package com.sys1yagi.channel_list.presentation.page.channelist
 
-import android.util.Log
 import androidx.compose.foundation.InteractionState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -90,7 +89,7 @@ fun Preview() {
                 )
             )
         ) {
-            Log.d("moge", "click!")
+
         }
     }
 }
