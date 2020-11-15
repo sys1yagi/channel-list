@@ -2,7 +2,6 @@ package com.sys1yagi.channel_list.presentation
 
 import androidx.compose.ui.graphics.Color
 
-val purple200 = Color(0xFFBB86FC)
-val purple500 = Color(0xFF6200EE)
-val purple700 = Color(0xFF3700B3)
-val teal200 = Color(0xFF03DAC5)
+val primary = Color(0xFFb71c1c)
+val primaryDark = Color(0xFF7f0000)
+val primaryLight = Color(0xFFf05545)

@@ -1,6 +1,5 @@
 package com.sys1yagi.channel_list.infrastracture.repository
 
-import android.util.Log
 import com.google.api.services.youtube.YouTube
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannel
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannelRepository

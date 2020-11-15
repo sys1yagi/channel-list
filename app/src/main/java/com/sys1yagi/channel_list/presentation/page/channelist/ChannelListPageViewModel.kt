@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ChannelListPageViewModel(
-    val subscriptionChannelService: SubscriptionChannelService
+    private val subscriptionChannelService: SubscriptionChannelService
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(ChannelListPageViewState())

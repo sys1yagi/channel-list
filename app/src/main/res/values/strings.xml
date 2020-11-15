@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">channel-list</string>
+    <string name="app_name">Channel List</string>
     <string name="home_subscription_channel">登録チャンネル</string>
     <string name="home_category">カテゴリ</string>
     <string name="home_setting">設定</string>

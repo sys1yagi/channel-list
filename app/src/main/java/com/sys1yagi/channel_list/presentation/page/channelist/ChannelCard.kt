@@ -34,7 +34,7 @@ fun ChannelCard(
             top = 8.dp,
             start = 8.dp,
             end = 8.dp,
-            bottom = 16.dp
+            bottom = 8.dp
         )
                 + Modifier.clickable(
             onClick = { onClick(subscriptionChannel) },
@@ -66,7 +66,7 @@ fun ChannelCard(
             Column(modifier = Modifier.padding(start = 16.dp)) {
                 Text(subscriptionChannel.title, style = typography.h6)
                 subscriptionChannel.description.truncate(120, "...").split("\n").forEach {
-                    Text(it)
+                    Text(it, style = typography.body1)
                 }
             }
         }

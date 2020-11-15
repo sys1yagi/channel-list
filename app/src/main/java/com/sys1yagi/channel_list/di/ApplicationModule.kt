@@ -11,12 +11,16 @@ import com.google.api.services.youtube.YouTubeScopes
 import com.sys1yagi.channel_list.GlobalViewModel
 import com.sys1yagi.channel_list.MainActivity
 import com.sys1yagi.channel_list.domain.auth.AuthenticationRepository
+import com.sys1yagi.channel_list.domain.category.CategoryRepository
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannelRepository
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannelService
+import com.sys1yagi.channel_list.infrastracture.database.CategoryDao
 import com.sys1yagi.channel_list.infrastracture.database.Database
 import com.sys1yagi.channel_list.infrastracture.database.SubscriptionChannelDao
+import com.sys1yagi.channel_list.infrastracture.repository.DatabaseCategoryRepository
 import com.sys1yagi.channel_list.infrastracture.repository.GoogleAuthenticationRepository
 import com.sys1yagi.channel_list.infrastracture.repository.YoutubeSubscriptionChannelRepository
+import com.sys1yagi.channel_list.presentation.page.category.CategoryPageViewModel
 import com.sys1yagi.channel_list.presentation.page.channelist.ChannelListPageViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -54,6 +58,10 @@ val singleton by lazy {
         single<SubscriptionChannelService> {
             SubscriptionChannelService(get())
         }
+        single<CategoryRepository> {
+            DatabaseCategoryRepository(get())
+        }
+
         single<Database> {
             Room.databaseBuilder(
                 androidApplication(),
@@ -62,6 +70,9 @@ val singleton by lazy {
         }
         single<SubscriptionChannelDao> {
             get<Database>().subscriptionChannelDao()
+        }
+        single<CategoryDao> {
+            get<Database>().categoryDao()
         }
     }
 }
@@ -89,6 +100,9 @@ val viewModels by lazy {
     module {
         viewModel {
             ChannelListPageViewModel(get())
+        }
+        viewModel {
+            CategoryPageViewModel(get())
         }
     }
 }

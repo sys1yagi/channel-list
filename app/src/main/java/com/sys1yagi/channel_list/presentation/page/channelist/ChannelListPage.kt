@@ -1,16 +1,13 @@
 package com.sys1yagi.channel_list.presentation.page.channelist
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.preferredSize
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
@@ -58,32 +55,18 @@ fun ChannelListDisplay(viewState: ChannelListPageViewState, onRefresh: () -> Uni
     }
 }
 
-@Composable
-fun ChannelList(subscriptionChannels: List<SubscriptionChannel>) {
-    LazyColumn(
-        contentPadding = PaddingValues(16.dp),
-        horizontalAlignment = Alignment.Start
-    ) {
-        items(subscriptionChannels) { item ->
-            ChannelCard(item) {
-
-            }
-        }
-    }
-}
-
 
 @Preview
 @Composable
-fun ChannelListDisplayPreviewLoading() {
+fun ChannelListDisplayPreviewLoaded() {
     ChannelListDisplay(
         ChannelListPageViewState(
             initializing = false,
             false,
-            listOf(
+            0.until(10).map {
                 SubscriptionChannel(
                     title = "HikakinTV",
-                    description = "HikakinTVはヒカキンが日常の面白いものを紹介するチャンネルです。\\n◆プロフィール◆\\nYouTubeにてHIKAKIN、HikakinTV、HikakinGames、HikakinBlogと\\n４つのチャンネルを運営し、動画の総アクセス数は100億回を突破、\\nチャンネル登録者数は計2000万人以上、YouTubeタレント事務所uuum株式会社ファウンダー兼最高顧問。",
+                    description = "HikakinTVはヒカキンが日常の面白いものを紹介するチャンネルです。\n◆プロフィール◆\nYouTubeにてHIKAKIN、HikakinTV、HikakinGames、HikakinBlogと\n４つのチャンネルを運営し、動画の総アクセス数は100億回を突破、\nチャンネル登録者数は計2000万人以上、YouTubeタレント事務所uuum株式会社ファウンダー兼最高顧問。",
                     channelId = "UCZf__ehlCEBPop-_sldpBUQ",
                     thumbnails = Thumbnails(
                         default = Thumbnail("https://yt3.ggpht.com/-NFhw6-eus8Y/AAAAAAAAAAI/AAAAAAAAAAA/rtPbnb9gvAQ/s88-c-k-no-mo-rj-c0xffffff/photo.jpg"),
@@ -91,17 +74,17 @@ fun ChannelListDisplayPreviewLoading() {
                         high = Thumbnail("https://yt3.ggpht.com/-NFhw6-eus8Y/AAAAAAAAAAI/AAAAAAAAAAA/rtPbnb9gvAQ/s800-c-k-no-mo-rj-c0xffffff/photo.jpg"),
                     )
                 )
-            )
+            }
         )
     ) {}
 }
 
 @Preview
 @Composable
-fun ChannelListDisplayPreviewLoaded() {
+fun ChannelListDisplayPreviewLoading() {
     ChannelListDisplay(
         ChannelListPageViewState(
             initializing = true
         )
-    ){}
+    ) {}
 }
