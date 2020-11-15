@@ -3,4 +3,6 @@
     <string name="home_subscription_channel">登録チャンネル</string>
     <string name="home_category">カテゴリ</string>
     <string name="home_setting">設定</string>
+    <string name="add_category">カテゴリを追加する</string>
+    <string name="category_name">カテゴリ名</string>
 </resources>

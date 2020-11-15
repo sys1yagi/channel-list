@@ -11,9 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.VectorAsset
+import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.*
 import com.sys1yagi.channel_list.R
+import com.sys1yagi.channel_list.presentation.page.addcategory.AddCategoryActivity
 import com.sys1yagi.channel_list.presentation.page.category.CategoryPage
 import com.sys1yagi.channel_list.presentation.page.channelist.ChannelListPage
 import com.sys1yagi.channel_list.presentation.page.setting.SettingPage
@@ -66,7 +68,10 @@ fun HomePage() {
                     ChannelListPage()
                 }
                 composable(HomeTab.Category.route) {
-                    CategoryPage()
+                    val context = ContextAmbient.current
+                    CategoryPage {
+                        context.startActivity(AddCategoryActivity.createIntent(context))
+                    }
                 }
                 composable(HomeTab.Setting.route) {
                     SettingPage()

@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CategoryPageViewModel(
-    val categoryRepository: CategoryRepository
+    private val categoryRepository: CategoryRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(CategoryPageViewState())

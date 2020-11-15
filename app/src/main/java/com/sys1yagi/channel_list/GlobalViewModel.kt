@@ -7,8 +7,14 @@ import com.sys1yagi.channel_list.domain.auth.User
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
+sealed class Screen(val route: String) {
+    object Home : Screen("home")
+    object Login : Screen("login")
+    object AddCategory : Screen("add-category")
+}
+
 class GlobalViewModel(
-    val authenticationRepository: AuthenticationRepository
+    private val authenticationRepository: AuthenticationRepository
 ) : ViewModel() {
 
     val loginState: Flow<User?>
@@ -30,3 +36,4 @@ class GlobalViewModel(
         }
     }
 }
+

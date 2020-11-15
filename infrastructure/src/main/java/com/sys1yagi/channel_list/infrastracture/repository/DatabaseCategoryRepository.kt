@@ -19,7 +19,7 @@ class DatabaseCategoryRepository(
     override suspend fun addCategory(category: Category) {
         categoryDao.insert(
             CategoryEntity(
-                category.id.value,
+                category.id?.value ?: 0,
                 category.name
             )
         )
@@ -28,7 +28,7 @@ class DatabaseCategoryRepository(
     override suspend fun deleteCategory(category: Category) {
         categoryDao.delete(
             CategoryEntity(
-                category.id.value,
+                category.id?.value ?: 0,
                 category.name
             )
         )

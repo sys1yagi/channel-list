@@ -21,6 +21,7 @@ import com.sys1yagi.channel_list.infrastracture.repository.DatabaseCategoryRepos
 import com.sys1yagi.channel_list.infrastracture.repository.GoogleAuthenticationRepository
 import com.sys1yagi.channel_list.infrastracture.repository.YoutubeSubscriptionChannelRepository
 import com.sys1yagi.channel_list.presentation.page.category.CategoryPageViewModel
+import com.sys1yagi.channel_list.presentation.page.addcategory.AddCategoryPageViewModel
 import com.sys1yagi.channel_list.presentation.page.channelist.ChannelListPageViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
@@ -103,6 +104,9 @@ val viewModels by lazy {
         }
         viewModel {
             CategoryPageViewModel(get())
+        }
+        viewModel {
+            AddCategoryPageViewModel(get())
         }
     }
 }

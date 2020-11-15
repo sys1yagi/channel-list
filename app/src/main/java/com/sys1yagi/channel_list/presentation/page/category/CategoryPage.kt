@@ -1,8 +1,7 @@
 package com.sys1yagi.channel_list.presentation.page.category
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -10,40 +9,39 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.sys1yagi.channel_list.di.getViewModel
 import com.sys1yagi.channel_list.domain.category.Category
 import com.sys1yagi.channel_list.presentation.component.CenterCircularProgressIndicator
 import com.sys1yagi.channel_list.presentation.typography
 
 @Composable
-fun CategoryPage() {
+fun CategoryPage(onClickAddCategory: () -> Unit) {
     val viewModel: CategoryPageViewModel = getViewModel()
     val viewState = viewModel.state.collectAsState()
 
-    ChannelListDisplay(viewState.value)
+    ChannelListDisplay(viewState.value, onClickAddCategory)
 }
 
 @Composable
-fun ChannelListDisplay(viewState: CategoryPageViewState) {
+fun ChannelListDisplay(viewState: CategoryPageViewState, onClickAddCategory: () -> Unit) {
     Surface(
         modifier = Modifier.fillMaxSize(),
     ) {
         if (viewState.initializing) {
             CenterCircularProgressIndicator()
         } else {
-            CategoryList(viewState.categories)
+            CategoryList(viewState.categories, onClickAddCategory)
         }
     }
 }
 
 @Composable
-fun CategoryList(categories: List<Category>) {
+fun CategoryList(categories: List<Category>, onClickAddCategory: () -> Unit) {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = {
-
-                },
+                onClick = onClickAddCategory,
                 icon = { Icon(Icons.Filled.Add) }
             )
         }
@@ -57,7 +55,15 @@ fun CategoryList(categories: List<Category>) {
                     Text("カテゴリはまだありません", style = typography.subtitle1)
                 }
             } else {
-
+                LazyColumn {
+                    items(categories) { category ->
+                        Card(modifier = Modifier.padding(8.dp) + Modifier.fillMaxWidth()) {
+                            Surface(Modifier.padding(16.dp)) {
+                                Text(category.name, style = typography.h6)
+                            }
+                        }
+                    }
+                }
             }
         }
     }
