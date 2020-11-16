@@ -109,7 +109,7 @@ fun Preview(darkTheme: Boolean) {
                 )
             }
         ) {
-            Surface(modifier = Modifier.fillMaxSize() + Modifier.padding(it)) {
+            Surface(modifier = Modifier.fillMaxSize().then(Modifier.padding(it))) {
                 Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally

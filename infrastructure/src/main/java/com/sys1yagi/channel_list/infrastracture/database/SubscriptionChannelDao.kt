@@ -16,4 +16,7 @@ interface SubscriptionChannelDao {
 
     @Query("SELECT count(0) FROM subscription_channels")
     suspend fun count(): Long
+
+    @Query("SELECT * FROM subscription_channels where channelId = :channelId")
+    suspend fun findByChannelId(channelId: String): SubscriptionChannelEntity?
 }

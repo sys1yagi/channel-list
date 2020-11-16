@@ -5,4 +5,5 @@
     <string name="home_setting">設定</string>
     <string name="add_category">カテゴリを追加する</string>
     <string name="category_name">カテゴリ名</string>
+    <string name="edit_channel_category">チャンネルのカテゴリを設定する</string>
 </resources>

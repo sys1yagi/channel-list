@@ -1,4 +1,4 @@
-package com.sys1yagi.channel_list.presentation.page.channelist
+package com.sys1yagi.channel_list.presentation.component
 
 import androidx.compose.foundation.InteractionState
 import androidx.compose.foundation.clickable
@@ -26,22 +26,29 @@ import dev.chrisbanes.accompanist.coil.CoilImage
 @Composable
 fun ChannelCard(
     subscriptionChannel: SubscriptionChannel,
+    truncateSize: Int = 120,
+    enabled: Boolean = true,
     onClick: (SubscriptionChannel) -> Unit,
 ) {
     Card(
         modifier =
-        Modifier.fillMaxWidth() + Modifier.padding(
-            top = 8.dp,
-            start = 8.dp,
-            end = 8.dp,
-            bottom = 8.dp
-        )
-                + Modifier.clickable(
-            onClick = { onClick(subscriptionChannel) },
-            enabled = true,
-            interactionState = remember { InteractionState() },
-            indication = RippleIndication()
-        ),
+        Modifier.fillMaxWidth()
+            .then(
+                Modifier.padding(
+                    top = 8.dp,
+                    start = 8.dp,
+                    end = 8.dp,
+                    bottom = 8.dp
+                )
+            )
+            .then(
+                Modifier.clickable(
+                    onClick = { onClick(subscriptionChannel) },
+                    enabled = enabled,
+                    interactionState = remember { InteractionState() },
+                    indication = RippleIndication()
+                )
+            ),
         elevation = 2.dp
     ) {
         Row(
@@ -65,9 +72,14 @@ fun ChannelCard(
             }
             Column(modifier = Modifier.padding(start = 16.dp)) {
                 Text(subscriptionChannel.title, style = typography.h6)
-                subscriptionChannel.description.truncate(120, "...").split("\n").forEach {
-                    Text(it, style = typography.body1)
+                if (truncateSize > 0) {
+                    subscriptionChannel.description.truncate(truncateSize, "...")
+                } else {
+                    subscriptionChannel.description
                 }
+                    .split("\n").forEach {
+                        Text(it, style = typography.body1)
+                    }
             }
         }
     }

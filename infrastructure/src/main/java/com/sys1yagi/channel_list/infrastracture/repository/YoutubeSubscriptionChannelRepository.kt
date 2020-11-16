@@ -3,8 +3,6 @@ package com.sys1yagi.channel_list.infrastracture.repository
 import com.google.api.services.youtube.YouTube
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannel
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannelRepository
-import com.sys1yagi.channel_list.domain.subscriptionchannel.Thumbnail
-import com.sys1yagi.channel_list.domain.subscriptionchannel.Thumbnails
 import com.sys1yagi.channel_list.infrastracture.database.SubscriptionChannelDao
 import com.sys1yagi.channel_list.infrastracture.database.SubscriptionChannelEntity
 import com.sys1yagi.channel_list.infrastracture.preference.SubscriptionChannelPref
@@ -56,18 +54,11 @@ class YoutubeSubscriptionChannelRepository(
 
     override fun subscriptionChannels(): Flow<List<SubscriptionChannel>> {
         return subscriptionChannelDao.subscribe().map {
-            it.map { item ->
-                SubscriptionChannel(
-                    item.title,
-                    item.description,
-                    item.channelId,
-                    Thumbnails(
-                        Thumbnail(item.thumbnailDefault),
-                        Thumbnail(item.thumbnailMedium),
-                        Thumbnail(item.thumbnailHigh)
-                    )
-                )
-            }
+            it.map(SubscriptionChannelEntity::toModel)
         }
+    }
+
+    override suspend fun findByChannelId(channelId: String): SubscriptionChannel? {
+        return subscriptionChannelDao.findByChannelId(channelId)?.let(SubscriptionChannelEntity::toModel)
     }
 }

@@ -12,17 +12,21 @@ import com.sys1yagi.channel_list.GlobalViewModel
 import com.sys1yagi.channel_list.MainActivity
 import com.sys1yagi.channel_list.domain.auth.AuthenticationRepository
 import com.sys1yagi.channel_list.domain.category.CategoryRepository
+import com.sys1yagi.channel_list.domain.channelcategory.ChannelCategoryRepository
+import com.sys1yagi.channel_list.domain.channelcategory.ChannelCategoryService
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannelRepository
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannelService
 import com.sys1yagi.channel_list.infrastracture.database.CategoryDao
 import com.sys1yagi.channel_list.infrastracture.database.Database
 import com.sys1yagi.channel_list.infrastracture.database.SubscriptionChannelDao
 import com.sys1yagi.channel_list.infrastracture.repository.DatabaseCategoryRepository
+import com.sys1yagi.channel_list.infrastracture.repository.DatabaseChannelCategoryRepository
 import com.sys1yagi.channel_list.infrastracture.repository.GoogleAuthenticationRepository
 import com.sys1yagi.channel_list.infrastracture.repository.YoutubeSubscriptionChannelRepository
-import com.sys1yagi.channel_list.presentation.page.category.CategoryPageViewModel
 import com.sys1yagi.channel_list.presentation.page.addcategory.AddCategoryPageViewModel
+import com.sys1yagi.channel_list.presentation.page.category.CategoryPageViewModel
 import com.sys1yagi.channel_list.presentation.page.channelist.ChannelListPageViewModel
+import com.sys1yagi.channel_list.presentation.page.editchannelcategory.EditChannelCategoryPageViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -50,19 +54,32 @@ val singleton by lazy {
             ).setApplicationName("com.sys1yagi.channel_list")
                 .build()
         }
+
+        // repository
         single<SubscriptionChannelRepository> {
             YoutubeSubscriptionChannelRepository(
                 get(),
                 get()
             )
         }
-        single<SubscriptionChannelService> {
-            SubscriptionChannelService(get())
-        }
         single<CategoryRepository> {
             DatabaseCategoryRepository(get())
         }
+        single<ChannelCategoryRepository> {
+            DatabaseChannelCategoryRepository(
+                get()
+            )
+        }
 
+        // service
+        single<SubscriptionChannelService> {
+            SubscriptionChannelService(get())
+        }
+        single {
+            ChannelCategoryService(get(), get())
+        }
+
+        // database
         single<Database> {
             Room.databaseBuilder(
                 androidApplication(),
@@ -75,6 +92,10 @@ val singleton by lazy {
         single<CategoryDao> {
             get<Database>().categoryDao()
         }
+        single {
+            get<Database>().channelCategoryDao()
+        }
+
     }
 }
 
@@ -107,6 +128,13 @@ val viewModels by lazy {
         }
         viewModel {
             AddCategoryPageViewModel(get())
+        }
+        viewModel { (channelId: String) ->
+            EditChannelCategoryPageViewModel(
+                channelId,
+                get(),
+                get()
+            )
         }
     }
 }

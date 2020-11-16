@@ -23,8 +23,10 @@
         </activity>
         <activity
             android:name=".presentation.page.addcategory.AddCategoryActivity"
-            android:theme="@style/Theme.Channellist.NoActionBar"
-            />
+            android:theme="@style/Theme.Channellist.NoActionBar" />
+        <activity
+            android:name=".presentation.page.editchannelcategory.EditChannelCategoryActivity"
+            android:theme="@style/Theme.Channellist.NoActionBar" />
     </application>
 
 </manifest>

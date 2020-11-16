@@ -13,9 +13,10 @@ import androidx.ui.tooling.preview.Preview
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannel
 import com.sys1yagi.channel_list.domain.subscriptionchannel.Thumbnail
 import com.sys1yagi.channel_list.domain.subscriptionchannel.Thumbnails
+import com.sys1yagi.channel_list.presentation.component.ChannelCard
 
 @Composable
-fun ChannelList(subscriptionChannels: List<SubscriptionChannel>) {
+fun ChannelList(subscriptionChannels: List<SubscriptionChannel>, onClickChannel: (SubscriptionChannel) -> Unit) {
     LazyColumn(
         contentPadding = PaddingValues(8.dp),
         horizontalAlignment = Alignment.Start
@@ -26,9 +27,7 @@ fun ChannelList(subscriptionChannels: List<SubscriptionChannel>) {
             }
         }
         items(subscriptionChannels) { item ->
-            ChannelCard(item) {
-
-            }
+            ChannelCard(item, onClick = onClickChannel)
         }
     }
 }
@@ -49,5 +48,5 @@ fun ChannelListPreview() {
                 )
             )
         }
-    )
+    ){}
 }

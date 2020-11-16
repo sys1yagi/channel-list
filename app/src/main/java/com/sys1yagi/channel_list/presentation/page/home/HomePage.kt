@@ -18,6 +18,7 @@ import com.sys1yagi.channel_list.R
 import com.sys1yagi.channel_list.presentation.page.addcategory.AddCategoryActivity
 import com.sys1yagi.channel_list.presentation.page.category.CategoryPage
 import com.sys1yagi.channel_list.presentation.page.channelist.ChannelListPage
+import com.sys1yagi.channel_list.presentation.page.editchannelcategory.EditChannelCategoryActivity
 import com.sys1yagi.channel_list.presentation.page.setting.SettingPage
 
 sealed class HomeTab(val route: String, @StringRes val resourceId: Int, val icon: VectorAsset) {
@@ -65,7 +66,10 @@ fun HomePage() {
         Surface(Modifier.padding(it)) {
             NavHost(navController, startDestination = HomeTab.Channel.route) {
                 composable(HomeTab.Channel.route) {
-                    ChannelListPage()
+                    val context = ContextAmbient.current
+                    ChannelListPage {
+                        context.startActivity(EditChannelCategoryActivity.createIntent(context, it))
+                    }
                 }
                 composable(HomeTab.Category.route) {
                     val context = ContextAmbient.current
