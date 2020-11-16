@@ -16,11 +16,11 @@ class ChannelCategoryService(
         ) { assignedList, categories ->
             ChannelCategories(
                 channel,
-                categories.map { category ->
+                categories.map { categoryWithCount ->
                     AssignedCategory(
                         channel,
-                        category,
-                        assignedList.any { it.id == category.id }
+                        categoryWithCount.category,
+                        assignedList.any { it.id == categoryWithCount.category.id }
                     )
                 }
             )

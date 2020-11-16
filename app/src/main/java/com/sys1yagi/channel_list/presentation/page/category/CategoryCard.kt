@@ -1,21 +1,41 @@
 package com.sys1yagi.channel_list.presentation.page.category
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.ui.tooling.preview.Preview
 import com.sys1yagi.channel_list.domain.category.Category
+import com.sys1yagi.channel_list.domain.category.CategoryWithAssignedChannelCount
 import com.sys1yagi.channel_list.presentation.typography
 
 @Composable
-fun CategoryCard(category: Category) {
-    Card(modifier = Modifier.padding(8.dp).then(Modifier.fillMaxWidth())) {
+fun CategoryCard(categoryWithCount: CategoryWithAssignedChannelCount) {
+    val (category, count) = categoryWithCount
+    Card(
+        modifier = Modifier.padding(8.dp).then(Modifier.fillMaxWidth()),
+        elevation = 2.dp
+    ) {
         Surface(Modifier.padding(16.dp)) {
-            Text(category.name, style = typography.h6)
+            Column {
+                Text(category.name, style = typography.h6)
+                Spacer(modifier = Modifier.height(4.dp))
+                Text("登録チャンネル数: ${count}件", style = typography.body2)
+            }
         }
     }
+}
+
+@Preview
+@Composable
+fun PreviewCategoryCard() {
+    CategoryCard(
+        CategoryWithAssignedChannelCount(
+            Category(null, "マラソン"),
+            10
+        )
+    )
 }

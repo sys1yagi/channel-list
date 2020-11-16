@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sys1yagi.channel_list.domain.category.Category
 import com.sys1yagi.channel_list.domain.category.CategoryRepository
+import com.sys1yagi.channel_list.domain.category.CategoryWithAssignedChannelCount
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
@@ -31,5 +32,5 @@ class CategoryPageViewModel(
 
 data class CategoryPageViewState(
     val initializing: Boolean = true,
-    val categories: List<Category> = emptyList()
+    val categories: List<CategoryWithAssignedChannelCount> = emptyList()
 )

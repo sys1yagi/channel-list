@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import com.sys1yagi.channel_list.di.getViewModel
 import com.sys1yagi.channel_list.domain.category.Category
+import com.sys1yagi.channel_list.domain.category.CategoryWithAssignedChannelCount
 import com.sys1yagi.channel_list.presentation.component.CenterCircularProgressIndicator
 import com.sys1yagi.channel_list.presentation.typography
 
@@ -41,7 +42,10 @@ fun ChannelListDisplay(viewState: CategoryPageViewState, onClickAddCategory: () 
 }
 
 @Composable
-fun CategoryList(categories: List<Category>, onClickAddCategory: () -> Unit) {
+fun CategoryList(
+    categories: List<CategoryWithAssignedChannelCount>,
+    onClickAddCategory: () -> Unit
+) {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
@@ -81,10 +85,14 @@ fun CategoryList(categories: List<Category>, onClickAddCategory: () -> Unit) {
 fun Preview() {
     CategoryList(
         listOf(
-            Category(null, "マラソン"),
-            Category(null, "ゲーム"),
+            CategoryWithAssignedChannelCount(
+                Category(null, "マラソン"),
+                10
+            ),
+            CategoryWithAssignedChannelCount(
+                Category(null, "ゲーム"),
+                8
+            )
         )
-    ) {
-
-    }
+    ) {}
 }
