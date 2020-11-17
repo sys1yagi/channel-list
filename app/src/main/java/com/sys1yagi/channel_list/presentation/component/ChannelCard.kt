@@ -44,9 +44,7 @@ fun ChannelCard(
             .then(
                 Modifier.clickable(
                     onClick = { onClick(subscriptionChannel) },
-                    enabled = enabled,
-                    interactionState = remember { InteractionState() },
-                    indication = RippleIndication()
+                    enabled = enabled
                 )
             ),
         elevation = 2.dp

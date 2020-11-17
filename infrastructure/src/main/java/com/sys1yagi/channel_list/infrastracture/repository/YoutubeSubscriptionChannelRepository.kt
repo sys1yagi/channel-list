@@ -7,8 +7,8 @@ import com.sys1yagi.channel_list.infrastracture.database.SubscriptionChannelDao
 import com.sys1yagi.channel_list.infrastracture.database.SubscriptionChannelEntity
 import com.sys1yagi.channel_list.infrastracture.preference.SubscriptionChannelPref
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import java.time.Instant
 import java.time.LocalDateTime
@@ -31,24 +31,32 @@ class YoutubeSubscriptionChannelRepository(
     }
 
     override suspend fun syncSubscriptionChannels() = withContext<Unit>(Dispatchers.IO) {
+        // TODO page tokenでページングする
         val response = service.subscriptions()
             .list(listOf("snippet,contentDetails"))
             .setMine(true)
             .setMaxResults(50)
             .execute()
         SubscriptionChannelPref.lastSyncDate = System.currentTimeMillis()
+        val entities = response.items.map { item ->
+            SubscriptionChannelEntity(
+                item.snippet.resourceId.channelId,
+                item.snippet.title,
+                item.snippet.description,
+                item.snippet.thumbnails.default.url,
+                item.snippet.thumbnails.medium.url,
+                item.snippet.thumbnails.high.url,
+            )
+        }
+        // TODO daoでtransactionで処理する
+        val all = subscriptionChannelDao.all()
+        val diff = all - entities
+        if(diff.isNotEmpty()) {
+            // TODO channel categoryも削除する
+            subscriptionChannelDao.delete(*(diff).toTypedArray())
+        }
         subscriptionChannelDao.insert(
-            *response.items.map { item ->
-                SubscriptionChannelEntity(
-                    0L,
-                    item.snippet.title,
-                    item.snippet.description,
-                    item.snippet.resourceId.channelId,
-                    item.snippet.thumbnails.default.url,
-                    item.snippet.thumbnails.medium.url,
-                    item.snippet.thumbnails.high.url,
-                )
-            }.toTypedArray()
+            *entities.toTypedArray()
         )
     }
 

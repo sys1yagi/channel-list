@@ -39,11 +39,6 @@ class ChannelListPageViewModel(
             subscriptionChannelService.refresh()
         }
     }
-
-    // TODO
-    override fun onCleared() {
-        super.onCleared()
-    }
 }
 
 data class ChannelListPageViewState(

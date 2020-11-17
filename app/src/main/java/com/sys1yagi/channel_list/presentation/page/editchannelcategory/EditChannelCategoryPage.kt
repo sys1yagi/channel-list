@@ -54,12 +54,7 @@ fun EditChannelCategoryDisplay(
                 CenterCircularProgressIndicator()
             } else {
                 LazyColumn(
-                    contentPadding = PaddingValues(
-                        top = 16.dp,
-                        bottom = 8.dp,
-                        start = 8.dp,
-                        end = 8.dp
-                    )
+
                 ) {
                     item {
                         ChannelCard(subscriptionChannel = subscriptionChannel,

@@ -21,22 +21,29 @@ import com.sys1yagi.channel_list.presentation.component.CenterCircularProgressIn
 import com.sys1yagi.channel_list.presentation.typography
 
 @Composable
-fun CategoryPage(onClickAddCategory: () -> Unit) {
+fun CategoryPage(
+    onClickAddCategory: () -> Unit,
+    onClickCategory: (Category) -> Unit
+) {
     val viewModel: CategoryPageViewModel = getViewModel()
     val viewState = viewModel.state.collectAsState()
 
-    ChannelListDisplay(viewState.value, onClickAddCategory)
+    ChannelListDisplay(viewState.value, onClickAddCategory, onClickCategory)
 }
 
 @Composable
-fun ChannelListDisplay(viewState: CategoryPageViewState, onClickAddCategory: () -> Unit) {
+fun ChannelListDisplay(
+    viewState: CategoryPageViewState,
+    onClickAddCategory: () -> Unit,
+    onClickCategory: (Category) -> Unit
+) {
     Surface(
         modifier = Modifier.fillMaxSize(),
     ) {
         if (viewState.initializing) {
             CenterCircularProgressIndicator()
         } else {
-            CategoryList(viewState.categories, onClickAddCategory)
+            CategoryList(viewState.categories, onClickAddCategory, onClickCategory)
         }
     }
 }
@@ -44,7 +51,8 @@ fun ChannelListDisplay(viewState: CategoryPageViewState, onClickAddCategory: () 
 @Composable
 fun CategoryList(
     categories: List<CategoryWithAssignedChannelCount>,
-    onClickAddCategory: () -> Unit
+    onClickAddCategory: () -> Unit,
+    onClickCategory: (Category) -> Unit
 ) {
     Scaffold(
         floatingActionButton = {
@@ -72,7 +80,7 @@ fun CategoryList(
                     )
                 ) {
                     items(categories) { category ->
-                        CategoryCard(category)
+                        CategoryCard(category, onClickCategory)
                     }
                 }
             }
@@ -93,6 +101,8 @@ fun Preview() {
                 Category(null, "ゲーム"),
                 8
             )
-        )
-    ) {}
+        ),
+        {},
+        {}
+    )
 }

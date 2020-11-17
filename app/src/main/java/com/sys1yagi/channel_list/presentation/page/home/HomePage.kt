@@ -17,6 +17,7 @@ import androidx.navigation.compose.*
 import com.sys1yagi.channel_list.R
 import com.sys1yagi.channel_list.presentation.page.addcategory.AddCategoryActivity
 import com.sys1yagi.channel_list.presentation.page.category.CategoryPage
+import com.sys1yagi.channel_list.presentation.page.categoryvideolist.CategoryVideoListActivity
 import com.sys1yagi.channel_list.presentation.page.channelist.ChannelListPage
 import com.sys1yagi.channel_list.presentation.page.editchannelcategory.EditChannelCategoryActivity
 import com.sys1yagi.channel_list.presentation.page.setting.SettingPage
@@ -73,9 +74,19 @@ fun HomePage() {
                 }
                 composable(HomeTab.Category.route) {
                     val context = ContextAmbient.current
-                    CategoryPage {
-                        context.startActivity(AddCategoryActivity.createIntent(context))
-                    }
+                    CategoryPage(
+                        onClickAddCategory = {
+                            context.startActivity(AddCategoryActivity.createIntent(context))
+                        },
+                        onClickCategory = {
+                            context.startActivity(
+                                CategoryVideoListActivity.createIntent(
+                                    context,
+                                    it
+                                )
+                            )
+                        }
+                    )
                 }
                 composable(HomeTab.Setting.route) {
                     SettingPage()

@@ -8,18 +8,13 @@ import com.sys1yagi.channel_list.domain.subscriptionchannel.Thumbnail
 import com.sys1yagi.channel_list.domain.subscriptionchannel.Thumbnails
 
 @Entity(
-    tableName = "subscription_channels",
-    indices = [Index(
-        value = ["channelId"],
-        unique = true
-    )],
+    tableName = "subscription_channels"
 )
 data class SubscriptionChannelEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long,
+    @PrimaryKey
+    val channelId: String,
     val title: String,
     val description: String,
-    val channelId: String,
     val thumbnailDefault: String,
     val thumbnailMedium: String,
     val thumbnailHigh: String

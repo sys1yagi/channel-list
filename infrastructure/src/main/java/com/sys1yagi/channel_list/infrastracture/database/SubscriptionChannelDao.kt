@@ -14,6 +14,9 @@ interface SubscriptionChannelDao {
     @Query("SELECT * FROM subscription_channels")
     fun subscribe(): Flow<List<SubscriptionChannelEntity>>
 
+    @Query("SELECT * FROM subscription_channels")
+    fun all(): List<SubscriptionChannelEntity>
+
     @Query("SELECT count(0) FROM subscription_channels")
     suspend fun count(): Long
 

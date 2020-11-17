@@ -10,6 +10,7 @@ import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannel
 import com.sys1yagi.channel_list.presentation.ChannellistTheme
 import com.sys1yagi.channel_list.presentation.page.addcategory.AddCategoryActivity
 
+// TODO 本当はnavigation内でやりたい
 class EditChannelCategoryActivity : AppCompatActivity() {
 
     companion object {

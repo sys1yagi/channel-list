@@ -21,7 +21,7 @@ class AddCategoryPageViewModel(
         viewModelScope.launch {
             categoryRepository.addCategory(category)
             _state.value = AddCategoryPageViewState(saved = true)
-            delay(1000)
+            delay(500)
             _state.value = AddCategoryPageViewState(closed = true)
         }
     }

@@ -10,8 +10,12 @@ import com.google.api.services.youtube.YouTube
 import com.google.api.services.youtube.YouTubeScopes
 import com.sys1yagi.channel_list.GlobalViewModel
 import com.sys1yagi.channel_list.MainActivity
+import com.sys1yagi.channel_list.domain.Id
 import com.sys1yagi.channel_list.domain.auth.AuthenticationRepository
+import com.sys1yagi.channel_list.domain.category.Category
 import com.sys1yagi.channel_list.domain.category.CategoryRepository
+import com.sys1yagi.channel_list.domain.categoryvideolist.CategoryVideoListRepository
+import com.sys1yagi.channel_list.domain.categoryvideolist.CategoryVideoListService
 import com.sys1yagi.channel_list.domain.channelcategory.ChannelCategoryRepository
 import com.sys1yagi.channel_list.domain.channelcategory.ChannelCategoryService
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannelRepository
@@ -19,12 +23,10 @@ import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannelS
 import com.sys1yagi.channel_list.infrastracture.database.CategoryDao
 import com.sys1yagi.channel_list.infrastracture.database.Database
 import com.sys1yagi.channel_list.infrastracture.database.SubscriptionChannelDao
-import com.sys1yagi.channel_list.infrastracture.repository.DatabaseCategoryRepository
-import com.sys1yagi.channel_list.infrastracture.repository.DatabaseChannelCategoryRepository
-import com.sys1yagi.channel_list.infrastracture.repository.GoogleAuthenticationRepository
-import com.sys1yagi.channel_list.infrastracture.repository.YoutubeSubscriptionChannelRepository
+import com.sys1yagi.channel_list.infrastracture.repository.*
 import com.sys1yagi.channel_list.presentation.page.addcategory.AddCategoryPageViewModel
 import com.sys1yagi.channel_list.presentation.page.category.CategoryPageViewModel
+import com.sys1yagi.channel_list.presentation.page.categoryvideolist.CategoryVideoListPageViewModel
 import com.sys1yagi.channel_list.presentation.page.channelist.ChannelListPageViewModel
 import com.sys1yagi.channel_list.presentation.page.editchannelcategory.EditChannelCategoryPageViewModel
 import org.koin.android.ext.koin.androidApplication
@@ -70,32 +72,52 @@ val singleton by lazy {
                 get()
             )
         }
+        single<CategoryVideoListRepository> {
+            YoutubeCategoryVideoListRepository(
+                get(),
+                get(),
+                get(),
+                get(),
+                get()
+            )
+        }
 
         // service
-        single<SubscriptionChannelService> {
+        single {
             SubscriptionChannelService(get())
         }
         single {
             ChannelCategoryService(get(), get())
         }
+        single{
+            CategoryVideoListService(get())
+        }
 
         // database
-        single<Database> {
+        single {
             Room.databaseBuilder(
                 androidApplication(),
                 Database::class.java, "database-name"
             ).build()
         }
-        single<SubscriptionChannelDao> {
+        single {
             get<Database>().subscriptionChannelDao()
         }
-        single<CategoryDao> {
+        single {
             get<Database>().categoryDao()
         }
         single {
             get<Database>().channelCategoryDao()
         }
-
+        single {
+            get<Database>().videoDao()
+        }
+        single {
+            get<Database>().categoryVideoListLastSyncDateDao()
+        }
+        single {
+            get<Database>().videoCategoryMappingDao()
+        }
     }
 }
 
@@ -133,6 +155,12 @@ val viewModels by lazy {
             EditChannelCategoryPageViewModel(
                 channelId,
                 get(),
+                get()
+            )
+        }
+        viewModel{ (categoryId: Id<Category>) ->
+            CategoryVideoListPageViewModel(
+                categoryId,
                 get()
             )
         }

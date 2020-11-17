@@ -13,12 +13,12 @@ import androidx.room.Index
         ForeignKey(
             entity = SubscriptionChannelEntity::class,
             parentColumns = ["channelId"],
-            childColumns = ["channelId"]
+            childColumns = ["channelId"],
         ),
         ForeignKey(
             entity = CategoryEntity::class,
             parentColumns = ["id"],
-            childColumns = ["categoryId"]
+            childColumns = ["categoryId"],
         )
     ],
     indices = [

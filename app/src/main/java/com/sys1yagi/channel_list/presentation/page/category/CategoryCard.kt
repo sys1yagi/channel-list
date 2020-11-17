@@ -1,5 +1,6 @@
 package com.sys1yagi.channel_list.presentation.page.category
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Surface
@@ -13,10 +14,13 @@ import com.sys1yagi.channel_list.domain.category.CategoryWithAssignedChannelCoun
 import com.sys1yagi.channel_list.presentation.typography
 
 @Composable
-fun CategoryCard(categoryWithCount: CategoryWithAssignedChannelCount) {
+fun CategoryCard(categoryWithCount: CategoryWithAssignedChannelCount, onClick: (Category) -> Unit) {
     val (category, count) = categoryWithCount
     Card(
-        modifier = Modifier.padding(8.dp).then(Modifier.fillMaxWidth()),
+        modifier =
+        Modifier.padding(8.dp)
+            .then(Modifier.fillMaxWidth())
+            .then(Modifier.clickable(onClick = { onClick(category) })),
         elevation = 2.dp
     ) {
         Surface(Modifier.padding(16.dp)) {
@@ -37,5 +41,5 @@ fun PreviewCategoryCard() {
             Category(null, "マラソン"),
             10
         )
-    )
+    ) {}
 }

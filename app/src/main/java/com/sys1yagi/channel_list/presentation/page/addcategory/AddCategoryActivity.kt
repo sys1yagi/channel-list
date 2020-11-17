@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.setContent
 import com.sys1yagi.channel_list.presentation.ChannellistTheme
 
-// 本当はnavigation内でやりたい
+// TODO 本当はnavigation内でやりたい
 class AddCategoryActivity : AppCompatActivity() {
     companion object {
         fun createIntent(context: Context): Intent {
