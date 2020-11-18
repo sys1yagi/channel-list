@@ -30,7 +30,9 @@ class CategoryVideoListActivity : AppCompatActivity() {
         val categoryName = intent.getStringExtra("categoryName") ?: ""
         setContent {
             ChannellistTheme {
-                CategoryVideoListPage(categoryId, categoryName)
+                CategoryVideoListPage(categoryId, categoryName) {
+                    finish()
+                }
             }
         }
     }

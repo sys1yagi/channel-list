@@ -28,9 +28,13 @@ class EditChannelCategoryActivity : AppCompatActivity() {
         setContent {
             ChannellistTheme {
                 val context = ContextAmbient.current
-                EditChannelCategoryPage(channelId) {
-                    context.startActivity(AddCategoryActivity.createIntent(context))
-                }
+                EditChannelCategoryPage(channelId,
+                    onAddCategory = {
+                        context.startActivity(AddCategoryActivity.createIntent(context))
+                    },
+                    onBack = {
+                        finish()
+                    })
             }
         }
     }

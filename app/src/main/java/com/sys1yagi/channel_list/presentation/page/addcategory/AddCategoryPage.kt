@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.sys1yagi.channel_list.R
 import com.sys1yagi.channel_list.di.getViewModel
 import com.sys1yagi.channel_list.domain.category.Category
+import com.sys1yagi.channel_list.presentation.component.NavigationUpTopAppBar
 
 @Composable
 fun CategoryEditPage(onClose: () -> Unit) {
@@ -22,24 +23,28 @@ fun CategoryEditPage(onClose: () -> Unit) {
     if (viewState.value.closed) {
         onClose()
     } else {
-        CategoryEditDisplay(viewState.value) {
-            viewModel.addCategory(it)
-        }
+        CategoryEditDisplay(
+            viewState.value, {
+                viewModel.addCategory(it)
+            },
+            onClose
+        )
     }
 }
 
 @Composable
 fun CategoryEditDisplay(
     viewState: AddCategoryPageViewState,
-    onClickAddCategory: (category: Category) -> Unit
+    onClickAddCategory: (category: Category) -> Unit,
+    onBack: () -> Unit,
 ) {
     val (name, setName) = remember { mutableStateOf("") }
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                val title = stringResource(R.string.add_category)
-                Text(title)
-            })
+            NavigationUpTopAppBar(
+                stringResource(R.string.add_category),
+                onBack
+            )
         }
     ) {
         Surface(modifier = Modifier.padding(16.dp)) {

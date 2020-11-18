@@ -19,7 +19,7 @@ import com.sys1yagi.channel_list.presentation.component.CenterCircularProgressIn
 import com.sys1yagi.channel_list.presentation.component.SwipeToRefreshLayout
 
 @Composable
-fun ChannelListPage(onClickChannel: (SubscriptionChannel)->Unit) {
+fun ChannelListPage(onClickChannel: (SubscriptionChannel) -> Unit) {
     val viewModel: ChannelListPageViewModel = getViewModel()
     val viewState = viewModel.state.collectAsState()
 
@@ -29,7 +29,11 @@ fun ChannelListPage(onClickChannel: (SubscriptionChannel)->Unit) {
 }
 
 @Composable
-fun ChannelListDisplay(viewState: ChannelListPageViewState, onClickChannel: (SubscriptionChannel)->Unit, onRefresh: () -> Unit) {
+fun ChannelListDisplay(
+    viewState: ChannelListPageViewState,
+    onClickChannel: (SubscriptionChannel) -> Unit,
+    onRefresh: () -> Unit
+) {
     Surface(
         modifier = Modifier.fillMaxSize(),
     ) {

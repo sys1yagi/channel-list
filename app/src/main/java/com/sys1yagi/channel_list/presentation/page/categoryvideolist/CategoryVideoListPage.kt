@@ -23,6 +23,7 @@ import com.sys1yagi.channel_list.domain.categoryvideolist.VideoThumbnail
 import com.sys1yagi.channel_list.domain.categoryvideolist.VideoThumbnails
 import com.sys1yagi.channel_list.presentation.ChannellistTheme
 import com.sys1yagi.channel_list.presentation.component.CenterCircularProgressIndicator
+import com.sys1yagi.channel_list.presentation.component.NavigationUpTopAppBar
 import com.sys1yagi.channel_list.presentation.component.SwipeToRefreshLayout
 import com.sys1yagi.channel_list.presentation.typography
 import org.koin.core.parameter.parametersOf
@@ -31,7 +32,8 @@ import java.time.ZonedDateTime
 @Composable
 fun CategoryVideoListPage(
     categoryId: Id<Category>,
-    categoryName: String
+    categoryName: String,
+    onBack: () -> Unit,
 ) {
     val viewModel: CategoryVideoListPageViewModel = getViewModel { parametersOf(categoryId) }
     val viewState = viewModel.state.collectAsState()
@@ -51,7 +53,8 @@ fun CategoryVideoListPage(
         },
         {
             viewModel.refresh()
-        }
+        },
+        onBack
     )
 }
 
@@ -60,14 +63,15 @@ fun CategoryVideoListDisplay(
     categoryName: String,
     viewState: CategoryVideoListPageViewState,
     onClickVideo: (Video) -> Unit,
-    onRefresh: () -> Unit
+    onRefresh: () -> Unit,
+    onBack: () -> Unit,
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                val title = stringResource(R.string.category_video_list, categoryName)
-                Text(title)
-            })
+            NavigationUpTopAppBar(
+                stringResource(R.string.category_video_list, categoryName),
+                onBack
+            )
         }
     ) {
         Surface(

@@ -3,6 +3,8 @@ package com.sys1yagi.channel_list.presentation.page.editchannelcategory
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -20,31 +22,41 @@ import com.sys1yagi.channel_list.domain.subscriptionchannel.Thumbnails
 import com.sys1yagi.channel_list.presentation.ChannellistTheme
 import com.sys1yagi.channel_list.presentation.component.CenterCircularProgressIndicator
 import com.sys1yagi.channel_list.presentation.component.ChannelCard
+import com.sys1yagi.channel_list.presentation.component.NavigationUpTopAppBar
 import com.sys1yagi.channel_list.presentation.typography
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun EditChannelCategoryPage(channelId: String, onAddCategory: () -> Unit) {
+fun EditChannelCategoryPage(
+    channelId: String,
+    onAddCategory: () -> Unit,
+    onBack: () -> Unit,
+) {
     val viewModel: EditChannelCategoryPageViewModel = getViewModel { parametersOf(channelId) }
     val viewState = viewModel.state.collectAsState()
 
-    EditChannelCategoryDisplay(viewState.value, onAddCategory) {
-        viewModel.updateAssignedCategory(it)
-    }
+    EditChannelCategoryDisplay(
+        viewState.value, onAddCategory,
+        {
+            viewModel.updateAssignedCategory(it)
+        },
+        onBack
+    )
 }
 
 @Composable
 fun EditChannelCategoryDisplay(
     viewState: EditChannelCategoryPageViewState,
     onAddCategory: () -> Unit,
-    onCheckAssignedCategory: (AssignedCategory) -> Unit
+    onCheckAssignedCategory: (AssignedCategory) -> Unit,
+    onBack: () -> Unit
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(title = {
-                val title = stringResource(R.string.edit_channel_category)
-                Text(title)
-            })
+            NavigationUpTopAppBar(
+                stringResource(R.string.edit_channel_category),
+                onBack
+            )
         }
     ) {
         Surface(modifier = Modifier.padding(8.dp)) {
@@ -128,6 +140,7 @@ fun PreviewCategoryIsEmpty() {
                 emptyList()
             ),
             {},
+            {},
             {}
         )
     }
@@ -164,6 +177,7 @@ fun PreviewCategory() {
                     )
                 )
             ),
+            {},
             {},
             {}
         )
