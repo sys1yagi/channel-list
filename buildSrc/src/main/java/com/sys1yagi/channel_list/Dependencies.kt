@@ -79,17 +79,22 @@ object Libs {
             const val tooling = "androidx.ui:ui-tooling:$version"
             const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
             const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha02"
+
+            const val uiTest = "androidx.ui:ui-test:$version"
         }
 
         object Test {
-            private const val version = "1.2.0"
+            private const val version = "1.3.0"
             const val core = "androidx.test:core:$version"
             const val rules = "androidx.test:rules:$version"
 
+
             object Ext {
-                private const val version = "1.1.2-rc01"
-                const val junit = "androidx.test.ext:junit-ktx:$version"
+                private const val extVersion = "1.1.2"
+                const val junit = "androidx.test.ext:junit-ktx:$extVersion"
+                const val truth = "androidx.test.ext:truth:${version}"
             }
+
 
             const val espressoCore = "androidx.test.espresso:espresso-core:3.2.0"
         }

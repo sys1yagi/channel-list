@@ -45,6 +45,8 @@ android {
     }
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
     }
 }
 
@@ -84,5 +86,7 @@ dependencies {
     testImplementation Libs.junit
 
     androidTestImplementation Libs.AndroidX.Test.Ext.junit
+    androidTestImplementation Libs.AndroidX.Test.Ext.truth
     androidTestImplementation Libs.AndroidX.Test.espressoCore
+    androidTestImplementation Libs.AndroidX.Compose.uiTest
 }
