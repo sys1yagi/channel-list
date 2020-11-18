@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -15,15 +16,24 @@ import com.sys1yagi.channel_list.domain.categoryvideolist.VideoThumbnails
 import com.sys1yagi.channel_list.presentation.ChannellistTheme
 import com.sys1yagi.channel_list.presentation.typography
 import dev.chrisbanes.accompanist.coil.CoilImage
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun VideoCard(video: Video, onClickVideo: (Video) -> Unit) {
     val height = 220.dp
+    val formatter = remember {
+        DateTimeFormatter
+            .ofPattern("yyyy年MM月dd日 HH:mm:ss")
+            .withZone(ZoneId.systemDefault())
+    }
+
     Column(
         Modifier
             .fillMaxWidth()
-            .clickable(onClick = {onClickVideo(video)})
+            .clickable(onClick = { onClickVideo(video) })
     ) {
         Box(
             Modifier
@@ -54,7 +64,9 @@ fun VideoCard(video: Video, onClickVideo: (Video) -> Unit) {
                 Modifier.padding(top = 4.dp).fillMaxWidth(),
                 horizontalAlignment = Alignment.End
             ) {
-                Text(text = video.publishedAt.toString(), style = typography.body2)
+                // TODO presentation用のVideoを定義する
+                val publishedAt = video.publishedAt.format(formatter)
+                Text(text = publishedAt, style = typography.body2)
             }
         }
     }
