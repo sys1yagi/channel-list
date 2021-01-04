@@ -22,12 +22,12 @@ object Libs {
     }
 
     object Accompanist {
-        private const val version = "0.3.3.1"
+        private const val version = "0.4.1"
         const val coil = "dev.chrisbanes.accompanist:accompanist-coil:$version"
     }
 
     object Kotlin {
-        private const val version = "1.4.10"
+        private const val version = "1.4.21"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$version"
@@ -68,7 +68,7 @@ object Libs {
 
         object Compose {
             const val snapshot = ""
-            const val version = "1.0.0-alpha07"
+            const val version = "1.0.0-alpha09"
 
             const val runtime = "androidx.compose.runtime:runtime:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"
@@ -76,11 +76,11 @@ object Libs {
             const val ui = "androidx.compose.ui:ui:$version"
             const val material = "androidx.compose.material:material:$version"
             const val animation = "androidx.compose.animation:animation:$version"
-            const val tooling = "androidx.ui:ui-tooling:$version"
+            const val tooling = "androidx.compose.ui:ui-tooling:$version"
             const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
-            const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha02"
+            const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha04"
 
-            const val uiTest = "androidx.ui:ui-test:$version"
+            const val uiTest = "androidx.compose.ui:ui-test:$version"
         }
 
         object Test {
@@ -94,7 +94,6 @@ object Libs {
                 const val junit = "androidx.test.ext:junit-ktx:$extVersion"
                 const val truth = "androidx.test.ext:truth:${version}"
             }
-
 
             const val espressoCore = "androidx.test.espresso:espresso-core:3.2.0"
         }

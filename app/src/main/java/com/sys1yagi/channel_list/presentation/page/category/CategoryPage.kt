@@ -13,7 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.sys1yagi.channel_list.di.getViewModel
 import com.sys1yagi.channel_list.domain.category.Category
 import com.sys1yagi.channel_list.domain.category.CategoryWithAssignedChannelCount
@@ -58,7 +58,7 @@ fun CategoryList(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = onClickAddCategory,
-                icon = { Icon(Icons.Filled.Add) }
+                content = { Icon(Icons.Filled.Add) }
             )
         }
     ) {

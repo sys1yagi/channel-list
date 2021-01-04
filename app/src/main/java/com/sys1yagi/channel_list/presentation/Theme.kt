@@ -15,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.sys1yagi.channel_list.R
 
 private val DarkColorPalette = darkColors(
@@ -105,7 +105,7 @@ fun Preview(darkTheme: Boolean) {
             floatingActionButton = {
                 FloatingActionButton(
                     onClick = {},
-                    icon = { Icon(Icons.Filled.Add) }
+                    content = { Icon(Icons.Filled.Add) }
                 )
             }
         ) {

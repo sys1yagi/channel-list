@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Preview
 import com.sys1yagi.channel_list.domain.categoryvideolist.Video
 import com.sys1yagi.channel_list.domain.categoryvideolist.VideoThumbnail
 import com.sys1yagi.channel_list.domain.categoryvideolist.VideoThumbnails
