@@ -53,7 +53,7 @@ fun HomePage() {
                         label = { Text(stringResource(screen.resourceId)) },
                         selected = currentRoute == screen.route,
                         onClick = {
-                            navController.popBackStack(navController.graph.startDestination, true)
+                            navController.popBackStack()
 
                             if (currentRoute != screen.route) {
                                 navController.navigate(screen.route)

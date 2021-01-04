@@ -11,6 +11,7 @@ import androidx.compose.runtime.onCommit
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.gesture.scrollorientationlocking.Orientation
+import androidx.compose.ui.platform.AmbientDensity
 import androidx.compose.ui.platform.DensityAmbient
 import androidx.compose.ui.unit.dp
 
@@ -24,7 +25,7 @@ fun SwipeToRefreshLayout(
     refreshIndicator: @Composable () -> Unit,
     content: @Composable () -> Unit
 ) {
-    val refreshDistance = with(DensityAmbient.current) { RefreshDistance.toPx() }
+    val refreshDistance = with(AmbientDensity.current) { RefreshDistance.toPx() }
     val state = rememberSwipeableState(refreshingState) { newValue ->
         // compare both copies of the swipe state before calling onRefresh(). This is a workaround.
         if (newValue && !refreshingState) onRefresh()
