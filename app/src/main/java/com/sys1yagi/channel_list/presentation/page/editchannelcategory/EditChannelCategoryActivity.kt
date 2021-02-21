@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.platform.AmbientContext
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.setContent
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannel
 import com.sys1yagi.channel_list.presentation.ChannellistTheme
@@ -27,7 +27,7 @@ class EditChannelCategoryActivity : AppCompatActivity() {
 
         setContent {
             ChannellistTheme {
-                val context = AmbientContext.current
+                val context = LocalContext.current
                 EditChannelCategoryPage(channelId,
                     onAddCategory = {
                         context.startActivity(AddCategoryActivity.createIntent(context))

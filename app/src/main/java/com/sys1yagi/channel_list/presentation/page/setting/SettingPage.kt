@@ -12,10 +12,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.sys1yagi.channel_list.GlobalViewModelAmbient
 
 @Composable
-fun SettingPage() {
+fun SettingPage(onClickSignOut: () -> Unit) {
     val globalViewModel = GlobalViewModelAmbient.current
     SettingPageDisplay {
-        globalViewModel.signOut()
+//         globalViewModel.signOut()
+        onClickSignOut()
     }
 }
 

@@ -22,7 +22,7 @@ fun NavigationUpTopAppBar(title: String, onBack: () -> Unit) {
             IconButton(onBack, modifier = Modifier.semantics {
                 this.text = AnnotatedString("back button")
             }) {
-                Icon(Icons.Filled.ArrowBack)
+                Icon(Icons.Filled.ArrowBack, contentDescription= null)
             }
         },
         title = {

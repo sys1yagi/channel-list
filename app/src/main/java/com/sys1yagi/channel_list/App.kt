@@ -10,7 +10,7 @@ import com.sys1yagi.channel_list.presentation.page.login.LoginPage
 fun App() {
     val viewModel = GlobalViewModelAmbient.current
     val loginState = viewModel.loginState.collectAsState(null)
-    Crossfade(current = loginState.value) {
+    Crossfade(loginState.value) {
         if (it == null) {
             LoginPage()
         } else {

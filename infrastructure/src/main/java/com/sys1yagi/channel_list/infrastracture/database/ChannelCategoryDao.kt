@@ -14,4 +14,8 @@ interface ChannelCategoryDao {
     @Transaction
     @Query("SELECT * FROM channel_categories where channelId = :channelId")
     fun subscribe(channelId: String): Flow<List<ChannelCategoryWithValuesEntity>>
+
+    @Transaction
+    @Query("SELECT * FROM channel_categories where channelId in (:channelIds)")
+    fun findByChannelIds(channelIds: List<String>): List<ChannelCategoryEntity>
 }

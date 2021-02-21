@@ -58,6 +58,7 @@ fun ChannelCard(
             ) {
                 CoilImage(
                     data = subscriptionChannel.thumbnails.default.url,
+                    contentDescription = null,
                     contentScale = ContentScale.Crop,
                     loading = { /* TODO do something better here */ },
                     modifier = Modifier

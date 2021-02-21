@@ -83,19 +83,29 @@ fun Preview(darkTheme: Boolean) {
             bottomBar = {
                 BottomNavigation {
                     BottomNavigationItem(
-                        icon = { Icon(Icons.Filled.List) },
+                        icon = { Icon(imageVector = Icons.Filled.List, contentDescription = null) },
                         label = { Text("ホーム") },
                         selected = true,
                         onClick = {}
                     )
                     BottomNavigationItem(
-                        icon = { Icon(Icons.Filled.Category) },
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Filled.Category,
+                                contentDescription = null
+                            )
+                        },
                         label = { Text("カテゴリ") },
                         selected = false,
                         onClick = {}
                     )
                     BottomNavigationItem(
-                        icon = { Icon(Icons.Filled.Settings) },
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Filled.Settings,
+                                contentDescription = null
+                            )
+                        },
                         label = { Text("設定") },
                         selected = false,
                         onClick = {}
@@ -105,11 +115,15 @@ fun Preview(darkTheme: Boolean) {
             floatingActionButton = {
                 FloatingActionButton(
                     onClick = {},
-                    content = { Icon(Icons.Filled.Add) }
+                    content = { Icon(imageVector = Icons.Filled.Add, contentDescription = null) }
                 )
             }
         ) {
-            Surface(modifier = Modifier.fillMaxSize().then(Modifier.padding(it))) {
+            Surface(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .then(Modifier.padding(it))
+            ) {
                 Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally

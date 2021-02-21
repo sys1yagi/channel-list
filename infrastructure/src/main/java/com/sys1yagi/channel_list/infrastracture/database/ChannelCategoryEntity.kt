@@ -14,6 +14,7 @@ import androidx.room.Index
             entity = SubscriptionChannelEntity::class,
             parentColumns = ["channelId"],
             childColumns = ["channelId"],
+
         ),
         ForeignKey(
             entity = CategoryEntity::class,

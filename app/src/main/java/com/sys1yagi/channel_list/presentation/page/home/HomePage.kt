@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.AmbientContext
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.*
 import com.sys1yagi.channel_list.R
@@ -26,6 +26,7 @@ sealed class HomeTab(val route: String, @StringRes val resourceId: Int, val icon
     object Channel : HomeTab("home", R.string.home_subscription_channel, Icons.Filled.List)
     object Category : HomeTab("history", R.string.home_category, Icons.Filled.Category)
     object Setting : HomeTab("setting", R.string.home_setting, Icons.Filled.Settings)
+    object Other : HomeTab("other", R.string.project_id, Icons.Filled.Settings)
 }
 
 @Composable
@@ -36,6 +37,9 @@ fun HomePage() {
         HomeTab.Category,
         HomeTab.Setting,
     )
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.arguments?.getString(KEY_ROUTE)
     Scaffold(
         topBar = {
             TopAppBar(title = {
@@ -44,22 +48,22 @@ fun HomePage() {
             })
         },
         bottomBar = {
-            BottomNavigation {
-                val navBackStackEntry by navController.currentBackStackEntryAsState()
-                val currentRoute = navBackStackEntry?.arguments?.getString(KEY_ROUTE)
-                items.forEach { screen ->
-                    BottomNavigationItem(
-                        icon = { Icon(screen.icon) },
-                        label = { Text(stringResource(screen.resourceId)) },
-                        selected = currentRoute == screen.route,
-                        onClick = {
-                            navController.popBackStack()
+            if (currentRoute != HomeTab.Other.route) {
+                BottomNavigation {
+                    items.forEach { screen ->
+                        BottomNavigationItem(
+                            icon = { Icon(screen.icon, contentDescription = null) },
+                            label = { Text(stringResource(screen.resourceId)) },
+                            selected = currentRoute == screen.route,
+                            onClick = {
+                                navController.popBackStack()
 
-                            if (currentRoute != screen.route) {
-                                navController.navigate(screen.route)
+                                if (currentRoute != screen.route) {
+                                    navController.navigate(screen.route)
+                                }
                             }
-                        }
-                    )
+                        )
+                    }
                 }
             }
         }
@@ -67,13 +71,13 @@ fun HomePage() {
         Surface(Modifier.padding(it)) {
             NavHost(navController, startDestination = HomeTab.Channel.route) {
                 composable(HomeTab.Channel.route) {
-                    val context = AmbientContext.current
+                    val context = LocalContext.current
                     ChannelListPage {
                         context.startActivity(EditChannelCategoryActivity.createIntent(context, it))
                     }
                 }
                 composable(HomeTab.Category.route) {
-                    val context = AmbientContext.current
+                    val context = LocalContext.current
                     CategoryPage(
                         onClickAddCategory = {
                             context.startActivity(AddCategoryActivity.createIntent(context))
@@ -89,7 +93,12 @@ fun HomePage() {
                     )
                 }
                 composable(HomeTab.Setting.route) {
-                    SettingPage()
+                    SettingPage {
+                        navController.navigate(HomeTab.Other.route)
+                    }
+                }
+                composable(HomeTab.Other.route) {
+                    Text(text = "hello")
                 }
             }
         }

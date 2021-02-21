@@ -61,6 +61,7 @@ val singleton by lazy {
         single<SubscriptionChannelRepository> {
             YoutubeSubscriptionChannelRepository(
                 get(),
+                get(),
                 get()
             )
         }

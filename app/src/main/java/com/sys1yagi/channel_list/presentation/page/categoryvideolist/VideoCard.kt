@@ -8,15 +8,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.sys1yagi.channel_list.domain.categoryvideolist.Video
 import com.sys1yagi.channel_list.domain.categoryvideolist.VideoThumbnail
 import com.sys1yagi.channel_list.domain.categoryvideolist.VideoThumbnails
 import com.sys1yagi.channel_list.presentation.ChannellistTheme
 import com.sys1yagi.channel_list.presentation.typography
 import dev.chrisbanes.accompanist.coil.CoilImage
-import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -43,6 +42,7 @@ fun VideoCard(video: Video, onClickVideo: (Video) -> Unit) {
         ) {
             CoilImage(
                 data = video.thumbnails.standard.url,
+                contentDescription = null,
                 contentScale = ContentScale.Crop,
                 loading = {
                     Column(

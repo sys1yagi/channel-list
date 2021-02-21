@@ -2,16 +2,17 @@ package com.sys1yagi.channel_list.presentation.page.editchannelcategory
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.Button
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.sys1yagi.channel_list.R
 import com.sys1yagi.channel_list.di.getViewModel
 import com.sys1yagi.channel_list.domain.category.Category
@@ -91,7 +92,8 @@ fun EditChannelCategoryDisplay(
                             }
                         }
                     } else {
-                        items(categories) { assignedCategory ->
+                        items(categories.size) { i ->
+                            val assignedCategory = categories[i]
                             AssignedCategoryCard(assignedCategory) {
                                 onCheckAssignedCategory(
                                     AssignedCategory(

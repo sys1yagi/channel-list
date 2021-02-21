@@ -5,10 +5,12 @@ object Versions {
 }
 
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:4.2.0-alpha15"
-    const val junit = "junit:junit:4.13"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-alpha07"
+    const val junit = "junit:junit:4.13.2"
     const val junit5 = "org.junit.jupiter:junit-jupiter:5.5.2"
-    const val material = "com.google.android.material:material:1.2.1"
+    const val material = "com.google.android.material:material:1.3.0"
+    const val versionPlugin = "com.github.ben-manes:gradle-versions-plugin:0.36.0"
+
 
     object Google {
         const val googleService = "com.google.gms:google-services:4.3.4"
@@ -22,19 +24,19 @@ object Libs {
     }
 
     object Accompanist {
-        private const val version = "0.4.1"
+        private const val version = "0.5.1"
         const val coil = "dev.chrisbanes.accompanist:accompanist-coil:$version"
     }
 
     object Kotlin {
-        private const val version = "1.4.21"
+        private const val version = "1.4.30"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
         const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$version"
     }
 
     object Coroutines {
-        private const val version = "1.3.9"
+        private const val version = "1.4.2"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
         const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
@@ -61,14 +63,14 @@ object Libs {
     }
 
     object AndroidX {
-        const val coreKtx = "androidx.core:core-ktx:1.5.0-alpha02"
+        const val coreKtx = "androidx.core:core-ktx:1.5.0-beta01"
         const val multiDex = "androidx.multidex:multidex:2.0.1"
-        const val appCompat = "androidx.appcompat:appcompat:1.2.0"
-        const val activity = "androidx.activity:activity-ktx:1.2.0-beta01"
+        const val appCompat = "androidx.appcompat:appcompat:1.3.0-beta01"
+        const val activity = "androidx.activity:activity-ktx:1.3.0-alpha02"
 
         object Compose {
             const val snapshot = ""
-            const val version = "1.0.0-alpha09"
+            const val version = "1.0.0-alpha12"
 
             const val runtime = "androidx.compose.runtime:runtime:$version"
             const val foundation = "androidx.compose.foundation:foundation:$version"
@@ -78,8 +80,9 @@ object Libs {
             const val animation = "androidx.compose.animation:animation:$version"
             const val tooling = "androidx.compose.ui:ui-tooling:$version"
             const val iconsExtended = "androidx.compose.material:material-icons-extended:$version"
-            const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha04"
-
+            const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha07"
+            const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha01"
+            const val activity = "androidx.activity:activity-compose:1.3.0-alpha02"
             const val uiTest = "androidx.compose.ui:ui-test:$version"
         }
 
@@ -90,17 +93,16 @@ object Libs {
 
 
             object Ext {
-                private const val extVersion = "1.1.2"
+                private const val extVersion = "1.1.3-alpha04"
                 const val junit = "androidx.test.ext:junit-ktx:$extVersion"
-                const val truth = "androidx.test.ext:truth:${version}"
+                const val truth = "androidx.test.ext:truth:1.4.0-alpha04"
             }
 
-            const val espressoCore = "androidx.test.espresso:espresso-core:3.2.0"
+            const val espressoCore = "androidx.test.espresso:espresso-core:3.4.0-alpha04"
         }
     }
 
     object Preference {
         const val kotPref = "com.chibatching.kotpref:kotpref:2.12.0"
-
     }
 }

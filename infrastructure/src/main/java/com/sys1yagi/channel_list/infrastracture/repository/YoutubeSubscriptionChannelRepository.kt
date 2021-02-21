@@ -3,12 +3,13 @@ package com.sys1yagi.channel_list.infrastracture.repository
 import com.google.api.services.youtube.YouTube
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannel
 import com.sys1yagi.channel_list.domain.subscriptionchannel.SubscriptionChannelRepository
+import com.sys1yagi.channel_list.infrastracture.database.ChannelCategoryDao
 import com.sys1yagi.channel_list.infrastracture.database.SubscriptionChannelDao
 import com.sys1yagi.channel_list.infrastracture.database.SubscriptionChannelEntity
 import com.sys1yagi.channel_list.infrastracture.preference.SubscriptionChannelPref
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.time.Instant
 import java.time.LocalDateTime
@@ -16,7 +17,8 @@ import java.time.ZoneId
 
 class YoutubeSubscriptionChannelRepository(
     private val service: YouTube,
-    private val subscriptionChannelDao: SubscriptionChannelDao
+    private val subscriptionChannelDao: SubscriptionChannelDao,
+    private val channelCategoryDao: ChannelCategoryDao
 ) : SubscriptionChannelRepository {
     override suspend fun lastSyncDate(): LocalDateTime? {
         val lastSyncDate = SubscriptionChannelPref.lastSyncDate
@@ -50,9 +52,15 @@ class YoutubeSubscriptionChannelRepository(
         }
         // TODO daoでtransactionで処理する
         val all = subscriptionChannelDao.all()
+
         val diff = all - entities
-        if(diff.isNotEmpty()) {
+        if (diff.isNotEmpty()) {
             // TODO channel categoryも削除する
+            val channelIds = diff.map { it.channelId }
+            if (channelIds.isNotEmpty()) {
+                val categories = channelCategoryDao.findByChannelIds(channelIds)
+                channelCategoryDao.delete(*(categories).toTypedArray())
+            }
             subscriptionChannelDao.delete(*(diff).toTypedArray())
         }
         subscriptionChannelDao.insert(
@@ -67,6 +75,7 @@ class YoutubeSubscriptionChannelRepository(
     }
 
     override suspend fun findByChannelId(channelId: String): SubscriptionChannel? {
-        return subscriptionChannelDao.findByChannelId(channelId)?.let(SubscriptionChannelEntity::toModel)
+        return subscriptionChannelDao.findByChannelId(channelId)
+            ?.let(SubscriptionChannelEntity::toModel)
     }
 }

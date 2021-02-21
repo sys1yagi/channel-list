@@ -4,11 +4,12 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.gms.google-services'
+    id "com.github.ben-manes.versions"
 }
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.sys1yagi.channel_list"
@@ -50,6 +51,13 @@ android {
     }
 }
 
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += ["-Xallow-jvm-ir-dependencies"]
+    }
+}
+
 dependencies {
     implementation project(":domain")
     implementation project(":infrastructure")
@@ -72,6 +80,8 @@ dependencies {
     implementation Libs.AndroidX.Compose.tooling
     implementation Libs.AndroidX.Compose.navigation
     implementation Libs.AndroidX.Compose.material
+    implementation Libs.AndroidX.Compose.viewModel
+    implementation Libs.AndroidX.Compose.activity
 
     implementation Libs.Accompanist.coil
 

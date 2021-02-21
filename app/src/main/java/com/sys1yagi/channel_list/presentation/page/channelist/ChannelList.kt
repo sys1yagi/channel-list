@@ -26,8 +26,8 @@ fun ChannelList(subscriptionChannels: List<SubscriptionChannel>, onClickChannel:
                 Text("${subscriptionChannels.size}件")
             }
         }
-        items(subscriptionChannels) { item ->
-            ChannelCard(item, onClick = onClickChannel)
+        items(subscriptionChannels.size) { i ->
+            ChannelCard(subscriptionChannels[i], onClick = onClickChannel)
         }
     }
 }
