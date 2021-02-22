@@ -3,8 +3,8 @@ package com.sys1yagi.channel_list.presentation.page.categoryvideolist
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.platform.setContent
 import com.sys1yagi.channel_list.domain.Id
 import com.sys1yagi.channel_list.domain.category.Category
 import com.sys1yagi.channel_list.presentation.ChannellistTheme

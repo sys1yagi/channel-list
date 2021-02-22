@@ -2,11 +2,7 @@ package com.sys1yagi.channel_list.presentation.component
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FractionalThreshold
-import androidx.compose.material.SwipeableState
-import androidx.compose.material.rememberSwipeableState
-import androidx.compose.material.swipeable
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
@@ -72,16 +68,12 @@ fun SwipeToRefreshLayout(
         }
     }
 }
+
 @ExperimentalMaterialApi
 private val <T> SwipeableState<T>.PreUpPostDownNestedScrollConnection: NestedScrollConnection
     get() = object : NestedScrollConnection {
         override fun onPreScroll(available: Offset, source: NestedScrollSource): Offset {
-            val delta = available.toFloat()
-            return if (delta < 0 && source == NestedScrollSource.Drag) {
-                performDrag(delta).toOffset()
-            } else {
-                Offset.Zero
-            }
+            return Offset.Zero
         }
 
         override fun onPostScroll(
@@ -89,22 +81,11 @@ private val <T> SwipeableState<T>.PreUpPostDownNestedScrollConnection: NestedScr
             available: Offset,
             source: NestedScrollSource
         ): Offset {
-            return if (source == NestedScrollSource.Drag) {
-                performDrag(available.toFloat()).toOffset()
-            } else {
-                Offset.Zero
-            }
+            return Offset.Zero
         }
 
         override fun onPreFling(available: Velocity): Velocity {
-            val toFling = Offset(available.x, available.y).toFloat()
-            return if (toFling < 0) {
-                performFling(velocity = toFling) {}
-                // since we go to the anchor with tween settling, consume all for the best UX
-                available
-            } else {
-                Velocity.Zero
-            }
+            return Velocity.Zero
         }
 
         override fun onPostFling(
